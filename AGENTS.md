@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+Booking enquiries share a Zod schema between the browser and a server function, with privileged writes loaded only inside the handler, so public visitors can submit without gaining access to stored enquiries.

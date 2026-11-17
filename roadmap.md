@@ -1,0 +1,3 @@
+- [ ] Build the one-page resort homepage with direct photo imports, responsive sections, and functional same-page navigation.
+- [ ] Make booking enquiries persist safely, offer WhatsApp, and verify a test submission.
+- [ ] Verify desktop/mobile rendering, links, metadata, tests, and preview logs; commit the completed change.
