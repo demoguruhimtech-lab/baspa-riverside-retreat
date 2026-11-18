@@ -27,20 +27,20 @@ import {
   Wifi,
   X,
 } from "lucide-react";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import cafeDessert from "@/assets/cafe-dessert.png";
-import economyRoom from "@/assets/economy-room.png";
-import mountainBalcony from "@/assets/mountain-balcony.png";
-import resortEntrance from "@/assets/resort-entrance.png";
-import resortExterior from "@/assets/resort-exterior.png";
-import resortFront from "@/assets/resort-front.png";
+import cafeDessert from "@/assets/cafe-dessert.webp";
+import economyRoom from "@/assets/economy-room.webp";
+import mountainBalcony from "@/assets/mountain-balcony.webp";
+import resortEntrance from "@/assets/resort-entrance.webp";
+import resortExterior from "@/assets/resort-exterior.webp";
+import resortFront from "@/assets/resort-front.webp";
 import resortMountainView from "@/assets/resort-mountain-view.webp";
-import standardRoom from "@/assets/standard-room.png";
-import winterValley from "@/assets/winter-valley.png";
-import woodenRoom from "@/assets/wooden-room.png";
+import standardRoom from "@/assets/standard-room.webp";
+import winterValley from "@/assets/winter-valley.webp";
+import woodenRoom from "@/assets/wooden-room.webp";
 import { bookingEnquirySchema, roomCategories } from "@/lib/booking-schema";
 import { submitBookingEnquiry } from "@/lib/booking.functions";
 
@@ -119,6 +119,7 @@ const slides = [
 ];
 
 const navItems = [
+  ["Home", "home"],
   ["About", "about"],
   ["Rooms", "rooms"],
   ["Dining", "restaurant"],
@@ -227,6 +228,8 @@ function ResortHome() {
   const [submitting, setSubmitting] = useState(false);
   const submitEnquiry = useServerFn(submitBookingEnquiry);
   const slide = slides[activeSlide];
+
+  if (!slide) return null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -375,7 +378,7 @@ function ResortHome() {
             <p>Find a room that feels right for your time in Sangla. Each one offers a comfortable place to unwind after a day among the mountains.</p>
           </div>
           <div className="room-grid">
-            {roomCards.map((room, index) => <article className="room-card reveal" key={room.name} style={{ "--reveal-delay": `${index * 100}ms` } as React.CSSProperties}>
+            {roomCards.map((room, index) => <article className="room-card reveal" key={room.name} style={{ "--reveal-delay": `${index * 100}ms` } as CSSProperties}>
               <a href="#booking" className="room-photo"><img src={room.image} alt={room.alt} loading="lazy" /><span className="room-number">0{index + 1}</span></a>
               <div className="room-card-copy"><span className="room-note"><Sparkles aria-hidden="true" />{room.note}</span><h3>{room.name}</h3><p>{room.description}</p><div className="room-card-bottom"><a href="#booking">View Details <ArrowUpRight aria-hidden="true" /></a><a href="#booking">Enquire <ArrowRight aria-hidden="true" /></a></div></div>
             </article>)}
@@ -417,21 +420,21 @@ function ResortHome() {
       <section id="amenities" className="amenities-section">
         <div className="section-inner amenities-inner">
           <div className="amenities-title reveal"><SectionEyebrow light>Considered comforts</SectionEyebrow><h2>Everything for a<br /><em>Relaxing Mountain Stay.</em></h2></div>
-          <div className="amenity-list">{amenities.map(({ icon: Icon, label }, index) => <div className="amenity-item reveal" key={label} style={{ "--reveal-delay": `${index * 60}ms` } as React.CSSProperties}><Icon aria-hidden="true" /><span>{label}</span><ArrowUpRight aria-hidden="true" className="amenity-arrow" /></div>)}</div>
+          <div className="amenity-list">{amenities.map(({ icon: Icon, label }, index) => <div className="amenity-item reveal" key={label} style={{ "--reveal-delay": `${index * 60}ms` } as CSSProperties}><Icon aria-hidden="true" /><span>{label}</span><ArrowUpRight aria-hidden="true" className="amenity-arrow" /></div>)}</div>
         </div>
       </section>
 
       <section className="section why-section">
         <div className="section-inner">
           <div className="center-heading reveal"><SectionEyebrow>Little things, lasting memories</SectionEyebrow><h2>Why Make It <em>The Lake View?</em></h2><p>A valley stay with beautiful scenery, comfortable rooms and the warmth of a thoughtful welcome.</p></div>
-          <div className="why-grid">{whyChoose.map(({ icon: Icon, title, text }, index) => <article className="why-item reveal" key={title} style={{ "--reveal-delay": `${index * 75}ms` } as React.CSSProperties}><span className="why-icon"><Icon aria-hidden="true" /></span><span className="why-number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
+          <div className="why-grid">{whyChoose.map(({ icon: Icon, title, text }, index) => <article className="why-item reveal" key={title} style={{ "--reveal-delay": `${index * 75}ms` } as CSSProperties}><span className="why-icon"><Icon aria-hidden="true" /></span><span className="why-number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></article>)}</div>
         </div>
       </section>
 
       <section className="section explore-section">
         <div className="section-inner">
           <div className="section-heading reveal"><div><SectionEyebrow>A valley worth wandering</SectionEyebrow><h2>Discover the Beauty<br /><em>of Sangla Valley.</em></h2></div><p>From village lanes to mountain horizons, discover some of the places that give this valley its unmistakable character.</p></div>
-          <div className="attraction-grid">{attractionCards.map((place, index) => <article className="attraction-card reveal" key={place.name} style={{ "--reveal-delay": `${index * 65}ms` } as React.CSSProperties}><img src={place.image} alt={place.alt} loading="lazy" /><div className="attraction-card-copy"><span>0{index + 1} <i>·</i> SANGLA VALLEY</span><h3>{place.name}</h3><p>{place.description}</p></div></article>)}</div>
+          <div className="attraction-grid">{attractionCards.map((place, index) => <article className="attraction-card reveal" key={place.name} style={{ "--reveal-delay": `${index * 65}ms` } as CSSProperties}><img src={place.image} alt={place.alt} loading="lazy" /><div className="attraction-card-copy"><span>0{index + 1} <i>·</i> SANGLA VALLEY</span><h3>{place.name}</h3><p>{place.description}</p></div></article>)}</div>
         </div>
       </section>
 
@@ -503,6 +506,6 @@ function ResortHome() {
   );
 }
 
-function SectionEyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+function SectionEyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
   return <p className={`section-eyebrow ${light ? "section-eyebrow--light" : ""}`}><span />{children}</p>;
 }
